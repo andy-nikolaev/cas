@@ -299,6 +299,7 @@ subprojects {
      * Apply publishing rules after the build has had a chance to
      * evaluate sub-projects to apply plugins, etc.
      */
+    apply plugin: ‘maven-publish’
     afterEvaluate { project ->
         if (projectShouldBePublished(project)) {
             logger.info "Project ${project.name} should be published"
