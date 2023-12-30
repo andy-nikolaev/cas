@@ -28,6 +28,12 @@ dependencyResolutionManagement {
                 includeGroupByRegex "net\\.shibboleth.*"
             }
         }
+	maven {
+            url "https://repository.liferay.com/nexus/content/repositories/public"
+            content {
+                includeGroupByRegex "com.github.mmoayyed.*"
+            }
+        }
         maven {
             url "https://jitpack.io"
             content {
