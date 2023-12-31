@@ -664,6 +664,10 @@ boolean projectShouldBePublished(Project project) {
         // shell is too big for github
         publishable = false
     }
+    if ("${releaseRepositoryUrl}".contains("github.com") && project.getPath().contains("support:cas-server-support-bom")) {
+        // shell is too big for github
+        publishable = false
+    }
     project.ext.publishable = publishable
 }
 
