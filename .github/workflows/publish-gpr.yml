@@ -90,10 +90,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Output Config
-        run: echo "username=${GITHUB_ACTOR} releaseRepositoryUrl=https://maven.pkg.github.com/${GITHUB_REPOSITORY} on tag ${{ github.ref }} Token Length is [$(echo -n $GITHUB_TOKEN | wc -c)] Tag is ${GITHUB_REF/refs\/tags\/}"
+        run: echo "username=${GITHUB_ACTOR} releaseRepositoryUrl=https://maven.pkg.github.com/${GITHUB_REPOSITORY} on tag ${{ github.ref }} Token Length is [$(echo -n $GITHUB_TOKEN | wc -c)] Tag is ${GITHUB_REF/refs\/tags\//}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish Release to GH Package Repository
-        run: cd support/cas-server-support-bom; ../../gradlew -DpublishReleases=true -DskipArtifactSigning=true -DpublishMinimalArtifacts=true --build-cache --configure-on-demand --no-daemon -Dorg.gradle.internal.http.socketTimeout="${TIMEOUT}" -Dorg.gradle.internal.http.connectionTimeout="${TIMEOUT}"  build publish -x test -x javadoc -x check -PrepositoryUsername=${GITHUB_ACTOR} -PrepositoryPassword=${GITHUB_TOKEN} -PreleaseRepositoryUrl=https://maven.pkg.github.com/${GITHUB_REPOSITORY} -Pversion=${GITHUB_REF/refs\/tags\/}
+      #run: cd support/cas-server-support-bom; ../../gradlew -DpublishReleases=true -DskipArtifactSigning=true -DpublishMinimalArtifacts=true --build-cache --configure-on-demand --no-daemon -Dorg.gradle.internal.http.socketTimeout="${TIMEOUT}" -Dorg.gradle.internal.http.connectionTimeout="${TIMEOUT}"  build publish -x test -x javadoc -x check -PrepositoryUsername=${GITHUB_ACTOR} -PrepositoryPassword=${GITHUB_TOKEN} -PreleaseRepositoryUrl=https://maven.pkg.github.com/${GITHUB_REPOSITORY} -Pversion=${GITHUB_REF/refs\/tags\/}
+        run: cd support/cas-server-support-bom; ../../gradlew -DpublishReleases=true -DskipArtifactSigning=true -DpublishMinimalArtifacts=true --build-cache --configure-on-demand --no-daemon -Dorg.gradle.internal.http.socketTimeout="${TIMEOUT}" -Dorg.gradle.internal.http.connectionTimeout="${TIMEOUT}"  build publish -x test -x javadoc -x check -PrepositoryUsername=${GITHUB_ACTOR} -PrepositoryPassword=${GITHUB_TOKEN} -PreleaseRepositoryUrl=https://maven.pkg.github.com/${GITHUB_REPOSITORY} -Pversion=6.5.5.1}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
